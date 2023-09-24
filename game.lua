@@ -43,6 +43,12 @@ game.start = true
     ball.sticky = true
  end
 
+ function ballStart()
+    ball.vx = -2
+    ball.vy = -2
+    ball.sticky = false
+ end
+
 function game.load()
     reset()
 end
@@ -55,12 +61,44 @@ function game.update(dt)
         elseif love.keyboard.isDown('s') and raket[1].y+raket.height < screen_height then
             raket[1].y = raket[1].y + raket.speed*dt
         end
+    end
+    if love.keyboard.isDown('up') and raket[2].y > 0 then
+        raket[2].y = raket[2].y - raket.speed*dt
+    elseif love.keyboard.isDown('down') and raket[2].y+raket.height < screen_height then
+        raket[2].y = raket[2].y + raket.speed*dt
+    end
 
-        if love.keyboard.isDown('up') and raket[2].y > 0 then
-            raket[2].y = raket[2].y - raket.speed*dt
-        elseif love.keyboard.isDown('down') and raket[2].y+raket.height < screen_height then
-            raket[2].y = raket[2].y + raket.speed*dt
-        end
+    -- mettre ce bout de code en commentaire
+    -- if ball.x < 0 then
+    --     ball.x = 0
+    --     ball.vx = 0 - ball.vx
+    -- elseif ball.x+ball.size > screen_width then
+    --     ball.x = screen_height - ball.size
+    --     ball.vx = 0 - ball.vx
+    -- end
+
+    if ball.y < 0 then
+        ball.y = 0
+        ball.vy = 0 - ball.vy
+    elseif ball.y+ball.size > screen_height then
+        ball.y = screen_height - ball.size
+        ball.vy = 0 - ball.vy
+    end
+
+    if ball.sticky == false then 
+        ball.x = ball.x + ball.vx
+        ball.y = ball.y + ball.vy
+    end
+
+
+    if ball.x >= raket[1].x and ball.x < raket[1].x + raket.width and ball.y >= raket[1].y and ball.y < raket[1].y + raket.height then
+        ball.x = raket[1].x + raket.width
+        ball.vx = 0 - ball.vx
+    end
+
+    if ball.x >= raket[2].x and ball.x < raket[2].x + raket.width and ball.y >= raket[2].y and ball.y < raket[2].y + raket.height then
+        ball.x = screen_width - raket.width - ball.size
+        ball.vx = 0 - ball.vx
     end
 end
 
@@ -80,6 +118,10 @@ function game.draw()
 end
 
 function game.keypressed(key)
+  if scene == 'game' and key == 'space' then
+    ballStart()
+  end 
+
 end
 
 return game
