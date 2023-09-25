@@ -54,8 +54,8 @@ local isInRulesPage = false
 rulesContent = "Règles du jeu Pong :\n\n" ..
                "Deux modes de jeu sont disponibles :\n\n" ..
                "1. Joueur contre Joueur : Utilisez les touches Z (monter) et S (descendre) pour le joueur de gauche, et les touches fléchées Haut et Bas pour le joueur de droite.\n\n" ..
-               "2. Bot contre Joueur : Vous jouez contre un bot. Utilisez les touches fléchées Haut et Bas pour le joueur de gauche, et les touches Z (monter) et S (descendre) pour le joueur de droite.\n\n" ..
-                "3. Le but du jeu est de faire passer la balle dans le camp adverse. Le premier joueur à atteindre 10 points gagne la partie.\n\n"
+               "2. Bot contre Joueur : Vous jouez contre un bot. Utilisez les touches fléchées Haut et Bas pour le joueur de droite. Le bot est à gauche.\n\n" ..
+                "3. Le but du jeu est de faire passer la balle dans le camp adverse. Le score s'affiche en haut. Bon jeu !!\n\n"
 
 
 function love.load()
