@@ -1,6 +1,6 @@
 local game = {}
 game.start = true
-game.gamemode = 2
+game.gamemode = 3
 -- 1 sera player vs player
 -- 2 sera bot vs player
 -- 3 sera bot vs bot
