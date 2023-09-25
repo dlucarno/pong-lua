@@ -1,8 +1,12 @@
 local game = {}
 game.start = true
+game.gamemode = 2
+-- 1 sera player vs player
+-- 2 sera bot vs player
+-- 3 sera bot vs bot
  raket = {}
  raket.width = 20
- raket.height = 120
+ raket.height = 145
  raket.speed = 205
 
  raket[1] = {}
@@ -25,6 +29,10 @@ game.start = true
  -- Vélocité de la balle 
  ball.vx = 0
  ball.vy = 0
+
+--bot
+
+local bot = require('bot')
 
  -- Mobile ou immobile
  ball.sticky = true
@@ -100,6 +108,16 @@ function game.update(dt)
         ball.x = screen_width - raket.width - ball.size
         ball.vx = 0 - ball.vx
     end
+
+
+    -- scores
+    if ball.x < -10 then
+        raket[2].score = raket[2].score + 1
+        resetBall()
+    elseif ball.x > screen_width + 10 then
+        raket[1].score = raket[2].score + 1
+        resetBall()
+    end
 end
 
 function game.draw()
@@ -115,7 +133,29 @@ function game.draw()
 
     --line
     love.graphics.line(screen_width/2, 0, screen_width/2, screen_height)
+
+    -- scores
+
+    love.graphics.printf(raket[1].score, fonts.score, -(screen_width/2) - 20, 20, screen_width, 'right')
+    love.graphics.printf(raket[2].score, fonts.score, (screen_width/2) + 20, 20, screen_width, 'left')
+
+    -- bot
+        if game.gamemode ~= 1 then
+            bot.update(dt, game.gamemode)
+            if ball.sticky == true and game.gamemode == 3 then
+                if game.start == false then
+                    game.start = true
+                end
+                ballStart()
+            end
+        end
+        
+
+
 end
+
+
+
 
 function game.keypressed(key)
   if scene == 'game' and key == 'space' then
