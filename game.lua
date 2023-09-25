@@ -7,7 +7,7 @@ game.gamemode = 3
  raket = {}
  raket.width = 20
  raket.height = 145
- raket.speed = 205
+ raket.speed = 225
 
  raket[1] = {}
  raket[1].x = 0
@@ -62,7 +62,7 @@ function game.load()
 end
 
 function game.update(dt)
-    dt = 1/90
+    dt = 1/100
     if game.start == true and scene == 'game' then
         if love.keyboard.isDown('z') and raket[1].y > 0 then
             raket[1].y = raket[1].y - raket.speed*dt
@@ -115,7 +115,7 @@ function game.update(dt)
         raket[2].score = raket[2].score + 1
         resetBall()
     elseif ball.x > screen_width + 10 then
-        raket[1].score = raket[2].score + 1
+        raket[1].score = raket[1].score + 1
         resetBall()
     end
 end
