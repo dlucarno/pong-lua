@@ -11,7 +11,7 @@ fonts.fourPath = 'assets/fonts/normal.ttf'
 fonts.score = love.graphics.newFont(fonts.path, 80)
 fonts.option = love.graphics.newFont(fonts.thirdPath, 30)
 fonts.title = love.graphics.newFont(fonts.fourPath, 50)
-
+fonts.author = love.graphics.newFont(fonts.fourPath, 10)
 menu = {}
 menu.title = {}
 menu.title.text = 'THE PONG'
@@ -41,6 +41,7 @@ menu.option.underlineWidth = 50
 
 
 function love.load()
+    love.window.setTitle("The Pong - Développé par Lucarno")
     screen_width = love.graphics.getWidth()
     screen_height =  love.graphics.getHeight()
     cursor = {}
@@ -84,6 +85,8 @@ function love.draw()
     if scene == "menu" then
         --title
         love.graphics.printf(menu.title.text, fonts.title, 0, menu.title.y, screen_width, 'center' )
+        love.graphics.printf('Développé par Steven Lucarno DODDE', fonts.author, 0, 150, screen_width, 'center' )
+
 
         --options
         love.graphics.printf(menu.option[1].text, fonts.option, 0, menu.option[1].y, screen_width, 'center' )
@@ -122,7 +125,7 @@ function love.mousepressed(mouseX, mouseY, button)
             love.mouse.setCursor(cursor.arrow)
         elseif mouseY >= menu.option[3].y and mouseY <= menu.option[3].y + 30 and mouseX > screen_width/2 - 150 and mouseX < screen_width/2 + 150 then
           love.event.quit()
-          
+
         end
     end
 end

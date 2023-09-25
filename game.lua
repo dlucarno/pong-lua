@@ -62,7 +62,7 @@ function game.load()
 end
 
 function game.update(dt)
-    dt = 1/100
+    dt = 1/90
     if game.start == true and scene == 'game' then
         if love.keyboard.isDown('z') and raket[1].y > 0 then
             raket[1].y = raket[1].y - raket.speed*dt
